@@ -1,0 +1,371 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        <title>Document</title>
+        <style>
+            html, body {
+                scroll-behavior: smooth;
+                background-color: #0a0a0a; 
+                cursor: none;
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            #mouse-glow {
+                position: fixed;
+                pointer-events: none; /* Ignore mouse events */
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.6); /* White glow */
+                transform: translate(-50%, -50%);
+                z-index: 9999; /* Ensure it's above other content */
+                display: none; /* Initially hidden */
+            }
+
+            .cursor-dot {
+                width: 5px;
+                height : 5px; 
+                background-color: white;
+            }
+            .cursor-outline{
+                width: 30px;
+                height: 30px;
+                border : 1px solid hsla(0,0%, 100%,0.5);
+            }
+            .cursor-dot, .cursor-outline{
+                position: fixed;
+                top: 0;
+                left : 0;
+                transform: translate(-50%,-50%);
+                border-radius: 50%;
+                z-index: 1;
+                pointer-events: none;
+            }
+            .container{
+                max-width: 1200px; 
+                margin: 0 auto
+            }
+            .navbar {
+                border-radius: 10px;
+                margin-top: 50px;
+                -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+                /*box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);*/
+                background-color: rgba(255, 255, 255, 0);
+            }
+            .navbar-center {
+                flex-grow: 1;
+                text-align: center;
+            }
+            .navbar-nav {
+                flex-direction: row;
+                justify-content: center;
+                width: 100%;
+                
+            }
+            .navbar-nav .nav-item {
+                display: inline-block;
+                margin-left: 770px;
+            }
+            .navbar-nav .nav-link {
+                padding-right: .5rem;
+                padding-left: .5rem;
+            
+            }
+            .navbar-nav .nav-item .btn {
+                background : transparent;
+                border : none;
+                color: antiquewhite ;
+               
+            }
+            .wrapper {
+                display: flex;
+                align-items: center; 
+                justify-content: space-between; 
+            }
+
+            .text-wrapper {
+                flex: 1; 
+                padding: 40px; 
+            }
+
+            .content p {
+                color: antiquewhite;
+                font-size: 70px;
+                margin-top: 60px;
+            }
+
+            .cube-container {
+                flex: 1; 
+                display: flex;
+                justify-content: center; 
+                align-items: center; 
+                -webkit-perspective: 1000px;
+                -moz-perspective: 1000px;
+            }
+
+            #cube {
+                width: 100%;
+                height: 100%;
+                position: relative ;
+                margin-top: 150px;
+                margin-right: 30px;
+              
+                -webkit-transform-style: preserve-3d;
+                -webkit-animation: rotatecube 10s infinite;
+                -moz-transform-style: preserve-3d;
+                -moz-animation: rotatecube 10s infinite;
+            }
+            #cube div {
+                width: 200px;
+                height: 200px;
+                display: block;
+                position: absolute;
+                border: 5px solid white; 
+                line-height: 200px;
+                text-align: center;
+                font-size: 50px;
+                font-weight: bold;
+                background-color: #0a0a0a;
+                backface-visibility: hidden;
+            }
+
+            @-webkit-keyframes rotatecube {
+                0% { -webkit-transform: rotateX(0deg) rotateY(360deg) rotateZ(90deg); }
+                25% { -webkit-transform: rotateX(90deg) rotateY(270deg) rotateZ(180deg); }
+                50% { -webkit-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
+                75% { -webkit-transform: rotateX(270deg) rotateY(90deg) rotateZ(360deg); }
+                100% { -webkit-transform: rotateX(360deg) rotateY(0deg) rotateZ(270deg); }
+            }
+
+            @-moz-keyframes rotatecube {
+                0% { -moz-transform: rotateX(0deg) rotateY(360deg) rotateZ(90deg); }
+                25% { -moz-transform: rotateX(90deg) rotateY(270deg) rotateZ(180deg); }
+                50% { -moz-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
+                75% { -moz-transform: rotateX(270deg) rotateY(90deg) rotateZ(360deg); }
+                100% { -moz-transform: rotateX(360deg) rotateY(0deg) rotateZ(270deg); }
+            }
+
+            .front {
+                background:#0a0a0a;
+
+            }
+
+            .back {
+                background: #0a0a0a;
+            
+            }
+
+            .right {
+                background: #0a0a0a;
+            
+            }
+
+            .left {
+                background:#0a0a0a;
+            
+            }
+
+            .top {
+                background: #0a0a0a;
+
+            }
+
+            .bottom {
+                background: #0a0a0a;
+            
+            }
+            #cube .front  {
+                -webkit-transform: rotateY(0deg ) translateZ( 100px );
+                -moz-transform: rotateY( 0deg ) translateZ( 100px );
+            }
+            #cube .back {
+                -webkit-transform: rotateX( 180deg ) translateZ( 100px );
+                -moz-transform: rotateX( 180deg ) translateZ( 100px );
+            }
+            #cube .right  {
+                -webkit-transform: rotateY(  90deg ) translateZ( 100px );
+                -moz-transform: rotateY(  90deg ) translateZ( 100px );
+            }
+            #cube .left   {
+                -webkit-transform: rotateY( -90deg ) translateZ( 100px );
+                -moz-transform: rotateY( -90deg ) translateZ( 100px );
+            }
+            #cube .top    {
+                -webkit-transform: rotateX(  90deg ) translateZ( 100px );
+                -moz-transform: rotateX(  90deg ) translateZ( 100px );
+            }
+            #cube .bottom {
+                -webkit-transform: rotateX( -90deg ) translateZ( 100px );
+                -moz-transform: rotateX( -90deg ) translateZ( 100px );
+            }
+            .wrapper2{
+                border-radius: 20%;
+                margin-top: 15%;
+                margin-left: 90px;
+                margin-right: 90px;
+                padding-top: 80px;
+                padding-bottom: 80px;
+                padding-left: 20px;
+            }
+            .wrapper2  p{
+                justify-content: center;
+                color: antiquewhite;
+                font-size: 50px;
+                
+            }
+            .full-div-link {
+                display: block; 
+                text-decoration: none; 
+                color: inherit; 
+            }
+            .past-work {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: antiquewhite;
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+            .blueprint-container {
+                background-color: #4040b2 ;
+                border: 1px solid #4040b2; 
+                border-radius: 16px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                padding: 20px;
+                max-width: 800px; 
+                margin: auto;
+                margin-bottom: 200px;
+                text-align: center; 
+                cursor: pointer;
+            }
+
+            .blueprint-header {
+                color: aliceblue;
+                font-size: 3em; 
+                margin-bottom: 0.5em;
+            }
+
+            .blueprint-subtext {
+                color: aliceblue;
+                font-size: 1.5em;
+                margin-bottom: 2em;
+            }
+            .redprint-container {
+                background-color: #ba3c31 ;
+                border: 1px solid #ba3c31; 
+                border-radius: 16px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                padding: 20px;
+                max-width: 800px; 
+                margin: auto;
+                margin-bottom: 200px;
+                text-align: center; 
+                cursor: pointer;
+            }
+
+            .redprint-header {
+                color: aliceblue;
+                font-size: 3em; 
+                margin-bottom: 0.5em;
+            }
+
+            .redprint-subtext {
+                color: aliceblue;
+                font-size: 1.5em;
+                margin-bottom: 2em;
+            }
+            .greenprint-container {
+                background-color: #2e7644 ;
+                border: 1px solid #2e7644; 
+                border-radius: 16px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                padding: 20px;
+                max-width: 800px; 
+                margin : auto;  
+                text-align: center; 
+                cursor: pointer;
+            }
+
+            .greenprint-header {
+                color: aliceblue;
+                font-size: 3em; 
+                margin-bottom: 0.5em;
+            }
+
+            .greenprint-subtext {
+                color: aliceblue;
+                font-size: 1.5em;
+                margin-bottom: 2em;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="mouse-glow"></div>
+        <div class="cursor-dot" data-cursor-dot></div>
+        <div class="cursor-outline" data-cursor-outline></div>
+        <div body-container>
+        <div class="container"> 
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="about-me.html">Matthieu Lambert</a>
+                <div class="navbar-center">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="#past-work" class="btn btn-light mr-auto">Past work</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href ="http://linkedin.com/in/matthieu-lambert-036446148/" target="_blank" class="navbar-linkedin">
+                    <img src="1000_F_396561934_t1OwjMZHrVY211bHA5uUEAix0F1SyLci.jpg" alt="LinkedIn" style="height: 30px;">
+                </a>
+            </nav>
+        </div>
+        <div class="wrapper">
+            <div class="text-wrapper">
+                <div class="content">
+                    <p>I am Matthieu Lambert. A student passionate about techonology.</p>
+                </div>
+            </div>
+
+            <div class="cube-container">
+                <div id="cube">
+                <div class="front"></div>
+                <div class="back"></div>
+                <div class="right"></div>
+                <div class="left"></div>
+                <div class="top"></div>
+                <div class="bottom"></div>
+                </div>
+            </div>
+            </div>
+        <div class="wrapper2">
+            <p>I work on data analysis projects and machine learning, see my work hereunder.</p>
+        </div>
+        <div id ="past-work" class="past-work">
+            <p>Past work :</p>
+        </div>
+        <div id="instagram-section" class="blueprint-container">
+            <a href="https://www.kaggle.com/code/matthieulambert2/review-analysis-latent-dirichlet-allocati" class="full-div-link" target="_blank">
+            <div class="blueprint-header">Instagram review analysis</div>
+            <div class="blueprint-subtext">I tried to analyse Instagram reviews by using Latent Dirichlet Allocation</div> 
+        </div>
+        <div class="redprint-container">
+            <a href="./HIV_SIDA_First_Analysis.pdf" class="full-div-link" target="_blank">
+            <div class="redprint-header">Supply Chain of HIV/SIDA treatments analyzed</div>
+            <div class="redprint-subtext">I tried to analyse a dataset containing data about HIV/SIDA treatment distribution</div> 
+        </div>
+        <div class="greenprint-container">
+            <a href="./Declarations_prealables_embauche.pdf" class="full-div-link" target="_blank">
+            <div class="greenprint-header">Amount of income declared by French workers</div>
+            <div class="greenprint-subtext">I tried to analyse a dataset containing data about income declared by French workers by using linear regression</div> 
+        </div>
+
+        <script src ="./script.js"></script>
+     <div>
+    </body>
+    </html>
+

@@ -1,0 +1,266 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <title>Document</title>
+    </head>
+    <style>
+        body{
+            background-color: #0a0a0a; 
+            cursor: none;
+            height: 100%; 
+            width: 100%;
+            scroll-behavior: smooth;
+        }
+        #mouse-glow {
+                    position: fixed;
+                    pointer-events: none; /* Ignore mouse events */
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.6); /* White glow */
+                    transform: translate(-50%, -50%);
+                    z-index: 9999; /* Ensure it's above other content */
+                    display: none; /* Initially hidden */
+                }
+                .cursor-dot {
+                    width: 5px;
+                    height : 5px; 
+                    background-color: white;
+                }
+                .cursor-outline{
+                    width: 30px;
+                    height: 30px;
+                    border : 1px solid hsla(0,0%, 100%,0.5);
+                }
+                .cursor-dot, .cursor-outline{
+                    position: fixed;
+                    top: 0;
+                    left : 0;
+                    transform: translate(-50%,-50%);
+                    border-radius: 50%;
+                    z-index: 1;
+                    pointer-events: none;
+                }
+                .icon1{
+                    display: flex;
+                    box-shadow: #adaaaa;
+                }
+                .material-icons{
+                color: antiquewhite;
+                margin-top: 40px;
+                margin-left: 20px;
+                font-size: 40px;
+                font-style: normal;
+                
+                }
+                .p1 {
+                    display: flex;
+                    justify-content: center;
+                    position: relative;
+                }
+                .p1 p{
+                    color: antiquewhite;
+                    font-style: italic;
+                    font-size: 3em;
+                }
+                .Summary{
+                    display: flex;
+                    justify-content: left;
+                }
+                .Summary p{
+                    font-size: 3em;
+                    color: antiquewhite;
+                    margin-left: 40px;
+                    margin-bottom: 0;
+                }
+                .hr-1{
+                    margin-top: 0px;
+                    margin-left: 40px ;
+                    margin-right: 40px;
+                }
+                .summary-content{
+                    display: flex;
+                    justify-content: left;
+                }
+                .summary-content p{
+                    font-size: 1em;
+                    color: antiquewhite;
+                    margin-left: 10px;
+                    margin-bottom: 10px;
+                }
+                .work-experience-container {
+                    display: flex;
+                    justify-content: space-between; /* Ajustez selon le besoin */
+                    align-items: center; /* Centre verticalement si nécessaire */
+                }
+                .Work-experience p{
+                    font-size: 3em;
+                    color: antiquewhite;
+                    margin-left: 40px;
+                    margin-bottom: 0;
+                    font: helvetica;
+                }
+                .hr-2{
+                    margin-top: 0px;
+                    margin-left: 40px ;
+                    margin-right: 40px;
+                }
+                .Work-experience-title{
+                    display: flex;
+                    justify-content: left;
+                    
+                }
+                .Work-experience-title p{
+                    font-size: 2em;
+                    color: antiquewhite;
+                    font: helvetica;
+                }
+                .date1{
+                    display: flex;
+                    justify-content: right;
+                    margin-right: 40px;
+                     
+                }
+                .date1 p{
+                    font-size: 2em;
+                    color: antiquewhite;
+                    font: helvetica;
+                }
+                .work-experience-description pre {
+                    font-size: 1em; 
+                    color: antiquewhite;
+                    white-space: pre-wrap; 
+                    word-break: break-word; 
+                    font: helvetica;
+                     
+                }
+                .competencies p {
+                    font-size: 3em;
+                    color: antiquewhite;
+                    margin-left: 40px;
+                    margin-bottom: 0;
+                    font: helvetica;
+                }
+
+                .competencies-content ul {
+                    list-style: none; /* Supprime les puces */
+                    padding-left: 0; /* Aucun espace à gauche pour la liste principale */
+                    color: antiquewhite;
+                    font-size: 1em;
+                    font: helvetica;
+                }
+
+                .competencies-content > ul > li {
+                    margin-bottom: 5px; /* Espacement entre les éléments de liste */
+                    font: helvetica;
+                }
+
+                /* Indentation pour les sous-listes */
+                .competencies-content > ul > li > ul {
+                    padding-left: 40px;
+                    font: helvetica;
+                }
+
+                /* Style des éléments des sous-listes sans indentation supplémentaire */
+                .competencies-content > ul > li > ul > li {
+                    padding-left: 20px;
+                    font: helvetica;
+
+                }
+                .list{
+                    margin-left: 20px;
+                    font: helvetica;
+                }
+
+
+
+    </style>
+    <body>
+        <div id="mouse-glow"></div>
+        <div class="cursor-dot" data-cursor-dot></div>
+        <div class="cursor-outline" data-cursor-outline></div>
+        <div class="icon1">
+            <a href="portfolio.html" class="material-icons">
+                <i>home</i>
+            </a>
+        </div>    
+        <div class="p1">
+            <p>My resume</p>
+        </div>
+        <div class="Summary">
+            <p>Summary</p>
+        </div>
+        <hr class="hr-1">
+        <div class="summary-content">
+            <p>I am a student in Logistics at the Paris Panthéon-Assas University, pursuing a Master's in Logistics Project Management (Master MPL). I am committed to Maison CHANEL for my second year of master's in flow management, where I will be responsible for assisting the France Transport Manager on "express" flows in total autonomy. This follows a first year of experience at Groupe CAT, a leading European logistics provider in its field, in automotive logistics where I learned to manage the saturation of vehicle storage locations and the company's logistical operations on behalf of its clients. I am therefore specialized in the distribution part of the Supply Chain. I have IT skills, including proficiency in Microsoft Excel, Microsoft Access, and Power BI. During my degree, I became passionnate about programming and I learned by myself Python, VBA, SQL. I realized some works related to data analysis and machine learning. I am now looking for a position in data analytics (applied to Supply Chain would be ideal). In addition to this, I am dynamic, motivated, and always ready to work in a team.</p>
+        </div>
+        <div class="Work-experience">
+            <p>Experience</p>
+        </div>
+        <hr class="hr-2">
+        <div class="work-experience-container">
+            <div class="Work-experience-title">
+                <p>Flows pilot specialized in express transportation</p>
+            </div>
+            <div class="date1">
+                <p>2023-2024</p>
+            </div>
+        </div>
+        <div class="work-experience-description">
+            <pre>(Position creation) France transportation manager assistant
+        Following the company change of its logistics subcontractor: 
+        - Defining the new KPIs
+        - Financial and operational reporting 
+        - Setting up the flows mapping 
+        - Training in new digital tools, troubleshooting of logistic anomalies linked at these tools and at various issues met during the logistic operations 
+        - Managing the "express" flows (european scope) and participating in the business reviews
+        - Setting up a continues improvement plan to optimize these operations</pre>
+        </div>
+        <div class="work-experience-container">
+            <div class="Work-experience-title">
+                <p>Flows pilot - Compound management</p>
+            </div>
+            <div class="date1">
+                <p>2022-2023</p>
+            </div>
+        </div>
+        <div class="work-experience-description">
+            <pre>Logistics Vehicles 
+        - Managing logistics operations (new models launches, special operations, algerian flows) in full autonomy with weekly reporting to clients during meetings
+        - Mananing the compounds capacity (two compounds in charge) in full autonomy. Making sure that the overall capacity stays below 85%. Planifying the capacity and then taking concrete actions with the compound manager to lower it
+        - Coding VBA macros to optimize the digital processes of the planning team</pre>
+        </div>
+        <div class="competencies">
+            <p>Skills</p>
+            <hr class="hr-1">
+            <div class="competencies-content">
+                <ul>
+                    <li>IT:</li>
+                    <ul>
+                        <div class="list">
+                        <li>Office suite including intermediate to proficient level in Microsoft Excel, Access, PowerBi, Powerpoint, Word</li>
+                        <li>TABLEAU</li>
+                        <li>Python</li>
+                        <li>VBA</li>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                    </div>
+                    </ul>
+                        
+                    <li>Languages:</li>
+                    <ul>
+                        <div class="list">
+                        <li>English (945/990 TOEIC)</li>
+                        <li>Korean: 3 years of learning</li>
+                        </div>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <script src ="./script.js"></script>
+    </body>
+    </html>
